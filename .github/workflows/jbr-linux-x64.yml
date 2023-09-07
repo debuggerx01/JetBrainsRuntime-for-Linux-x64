@@ -24,8 +24,8 @@ jobs:
     - name: Generate Variables
       id: vars
       run: |
-        sudo apt-get update -y
-        sudo apt-get install -y curl
+        apt-get update -y
+        apt-get install -y curl
         release_id='${{ github.event.inputs.release_id }}'
         curl -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -sfL -m 60 -o /tmp/latest.json "${{ github.api_url }}/repos/JetBrains/JetBrainsRuntime/releases/${release_id:-latest}"
 
@@ -68,9 +68,9 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo apt-get update -y
-        sudo apt-get install -y libasound2-dev libavcodec-dev libavformat-dev libcups2-dev libgl1-mesa-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk2.0-dev libgtk-3-dev libudev-dev libxrandr-dev libxslt1-dev libxtst-dev libxxf86vm-dev x11proto-xf86vidmode-dev
-        sudo apt-get clean -y
+        apt-get update -y
+        apt-get install -y libasound2-dev libavcodec-dev libavformat-dev libcups2-dev libgl1-mesa-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk2.0-dev libgtk-3-dev libudev-dev libxrandr-dev libxslt1-dev libxtst-dev libxxf86vm-dev x11proto-xf86vidmode-dev
+        apt-get clean -y
 
     - name: Prepare JCEF
       run: |
