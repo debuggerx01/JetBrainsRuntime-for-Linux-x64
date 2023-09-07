@@ -23,6 +23,7 @@ jobs:
 
     - name: Generate Variables
       id: vars
+      shell: bash
       run: |
         apt-get update -y
         apt-get install -y curl jq
