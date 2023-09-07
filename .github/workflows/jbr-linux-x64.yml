@@ -16,7 +16,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ubuntu:18.04
+    container: ubuntu:18.10
     steps:
     - name: Clone Repository
       uses: actions/checkout@v3
