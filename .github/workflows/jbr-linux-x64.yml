@@ -91,11 +91,8 @@ jobs:
     - name: Patch & Compile JetBrainsRuntime with JCEF
       id: compile
       run: |
-        pwd
-        ls
         cd JetBrainsRuntime
-        ls
-        git log -1
+        # git log -1
 
         patch -p1 < ../idea.patch
 
