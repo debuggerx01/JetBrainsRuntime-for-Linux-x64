@@ -24,6 +24,8 @@ jobs:
     - name: Generate Variables
       id: vars
       run: |
+        sudo apt-get update -y
+        sudo apt-get install -y curl
         release_id='${{ github.event.inputs.release_id }}'
         curl -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -sfL -m 60 -o /tmp/latest.json "${{ github.api_url }}/repos/JetBrains/JetBrainsRuntime/releases/${release_id:-latest}"
 
