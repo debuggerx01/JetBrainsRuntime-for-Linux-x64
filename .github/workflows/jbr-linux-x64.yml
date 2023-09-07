@@ -25,7 +25,7 @@ jobs:
       id: vars
       run: |
         apt-get update -y
-        apt-get install -y curl
+        apt-get install -y curl jq
         release_id='${{ github.event.inputs.release_id }}'
         curl -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -sfL -m 60 -o /tmp/latest.json "${{ github.api_url }}/repos/JetBrains/JetBrainsRuntime/releases/${release_id:-latest}"
 
