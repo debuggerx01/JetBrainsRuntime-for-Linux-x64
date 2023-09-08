@@ -16,7 +16,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ubuntu:20.04
+    container: debian:buster
     steps:
     - name: Clone Repository
       uses: actions/checkout@v3
