@@ -70,7 +70,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         apt-get update -y
-        apt-get install -y libasound2-dev libavcodec-dev libavformat-dev libcups2-dev libgl1-mesa-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk2.0-dev libgtk-3-dev libudev-dev libxrandr-dev libxslt1-dev libxtst-dev libxxf86vm-dev x11proto-xf86vidmode-dev aria2 git zip unzip openjdk-11-jdk rsync
+        apt-get install -y libasound2-dev libavcodec-dev libavformat-dev libcups2-dev libgl1-mesa-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk2.0-dev libgtk-3-dev libudev-dev libxrandr-dev libxslt1-dev libxtst-dev libxxf86vm-dev x11proto-xf86vidmode-dev aria2 git zip unzip rsync
         apt-get clean -y
 
     - name: Prepare JCEF
@@ -80,6 +80,13 @@ jobs:
         tar -zxvf jbrsdk_jcef.tgz --strip-components=1 -C jcef_linux_x64 --wildcards -- 'jbrsdk_jcef-*/jmods/gluegen.rt.jmod' 'jbrsdk_jcef-*/jmods/jogl.all.jmod' 'jbrsdk_jcef-*/jmods/jcef.jmod'
         rm -f jbrsdk_jcef.tgz
         touch jcef_linux_x64/jcef.version
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3.12.0
+      with:
+        # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+        java-version: '17'
+        distribution: 'temurin'
 
     - name: Clone JBR Repository
       uses: actions/checkout@v3
@@ -99,7 +106,7 @@ jobs:
 
         mv ../jcef_linux_x64 ./
 
-        export BOOT_JDK="/usr/lib/jvm/java-11-openjdk-amd64"
+        export BOOT_JDK="$JAVA_HOME_17_X64"
 
         jb/project/tools/linux/scripts/mkimages_x64.sh '${{ steps.vars.outputs.build_number }}' jcef
 
